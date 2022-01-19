@@ -30,13 +30,13 @@ stage ('Deployments'){
   parallel {
     stage ('Deploy to Staging') {
     steps {
-    deploy adapters: [tomcat8(credentialsId: 'f7d2dee4-f966-4d4a-ab55-b1416e69af84', path: '', url: '')], contextPath: null, war: '**/*.war'
+    deploy adapters: [tomcat8(credentialsId: 'f7d2dee4-f966-4d4a-ab55-b1416e69af84', path: '', url: '${params.TOMCAT_DEV_IP}')], contextPath: null, war: '**/*.war'
 }
 }
 
     stage ('Deploy to Production') {
     steps {
-     deploy adapters: [tomcat8(credentialsId: 'f7d2dee4-f966-4d4a-ab55-b1416e69af84', path: '', url: '')], contextPath: null, war: '**/*.war'
+     deploy adapters: [tomcat8(credentialsId: 'f7d2dee4-f966-4d4a-ab55-b1416e69af84', path: '', url: '${params.TOMCAT_PROD_IP}')], contextPath: null, war: '**/*.war'
 }
 }
 }
